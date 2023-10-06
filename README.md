@@ -31,48 +31,46 @@ To get the project up and running, follow these steps:
 
     Clone the repository:
 
-    bash
-
-git clone <repository-url>
+git clone https://github.com/baselah/blog-site.git
 
 Navigate to the project directory:
 
-bash
 
-cd <project-directory>
+
+cd blog-site
 
 Install PHP dependencies using Composer:
 
-bash
+
 
 composer install
 
 Install JavaScript dependencies using npm:
 
-bash
+
 
 npm install
 
 Copy the .env.example file to .env and update the database configuration and other environment variables:
 
-bash
+
 
 cp .env.example .env
 
 Generate an application key:
 
-bash
+
 
 php artisan key:generate
 
 Migrate and seed the database:
 
-bash
+
 
 php artisan migrate --seed
 
 Compile the Vue.js assets:
 
-bash
+
 
 npm run dev
