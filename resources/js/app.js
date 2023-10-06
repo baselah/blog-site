@@ -13,14 +13,19 @@ import Home from "./components/Home/home.vue";
 import SuccessMessage from "./components/SuccessMessage.vue";
 import Login from "./components/Home/Login.vue";
 import Details from "./components/Home/Details.vue";
+import { requireAuth } from "./routeGuards";
 
 // Adjust the path as needed
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path: "/", component: Home },
-        { path: "/subscribers", component: SubscribersTable },
-        { path: "/blogs", component: BlogsTable },
+        {
+            path: "/subscribers",
+            component: SubscribersTable,
+            beforeEnter: requireAuth,
+        },
+        { path: "/blogs", component: BlogsTable, beforeEnter: requireAuth },
         { path: "/login", component: Login },
         {
             path: "/details/:blogg",

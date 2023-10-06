@@ -11,5 +11,11 @@ use Laravel\Sanctum\HasApiTokens;
 class Subscriber extends Authenticatable
 {
     use HasApiTokens, HasFactory, SoftDeletes;
-   
+
+    protected $fillable = [
+        'name',
+        'user_name',
+        'password',
+        'status'
+    ];
 }

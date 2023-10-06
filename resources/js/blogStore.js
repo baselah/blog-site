@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import axios from "axios";
+import { localStoragePlugin } from "./plugin";
 // Create a new Vuex store instance
 export default createStore({
     namespaced: true,
@@ -7,20 +8,24 @@ export default createStore({
         // Define your application's state here
         // Example:
         blogs: [],
-
-        user: null, // Initially, the user is null
+        isAuthenticated: false,
+        currentUser: null, // Initially, the user is null
         token: null, // Initially, the token is null
     },
     mutations: {
         setUser(state, user) {
-            state.user = user;
+            state.currentUser = user;
         },
         setToken(state, token) {
             state.token = token;
         },
+        setAuth(state, isAuthenticated) {
+            state.isAuthenticated = isAuthenticated;
+        },
         clearAuthData(state) {
-            state.user = null;
+            state.currentUser = null;
             state.token = null;
+            state.isAuthenticated = false;
         },
         // Define functions to modify the state
         // Example:
@@ -59,7 +64,9 @@ export default createStore({
                 const { user, token } = response.data;
 
                 // Store user data and token in the Vuex store
-                commit("setUser", user);
+                commit("setUser", user.user_name);
+                commit("setAuth", true);
+
                 commit("setToken", token);
 
                 // Redirect to another page or perform additional actions
@@ -88,6 +95,7 @@ export default createStore({
                 // Commit a mutation to update the state with the fetched blogs
                 commit("setBlogs", blogs);
             } catch (error) {
+                alert(error.response.data.message);
                 console.error("Error fetching blogs:", error);
             }
         },
@@ -102,6 +110,7 @@ export default createStore({
                 // Commit the mutation to add the new blog to the state
                 commit("addBlog", response.data.blog);
             } catch (error) {
+                alert(error.response.data.message);
                 console.error("Error creating blog:", error);
                 throw error;
             }
@@ -116,6 +125,8 @@ export default createStore({
                 // Commit the mutation to update the blog in the state
                 commit("updateBlog", response.data.blog);
             } catch (error) {
+                alert(error.response.data.message);
+
                 console.error("Error updating blog:", error);
                 throw error;
             }
@@ -128,6 +139,8 @@ export default createStore({
                 // Commit the mutation to delete the blog from the state
                 commit("deleteBlog", blogId);
             } catch (error) {
+                alert(error.response.data.message);
+
                 console.error("Error deleting blog:", error);
                 throw error;
             }
@@ -149,6 +162,5 @@ export default createStore({
             return blog;
         },
     },
-
-
+    plugins: [localStoragePlugin],
 });

@@ -1,7 +1,7 @@
 <template>
     <nav
-        class="navbar navbar-expand-lg navbar-light"
-        style="background-color: #e3f2fd"
+        class="navbar navbar-expand-lg navbar-light mr-5 ml-5"
+        style="background-color: #e3f2fd padding: ;"
     >
         <a class="navbar-brand" href="#">Blog Site</a>
         <button
@@ -34,57 +34,46 @@
                     >
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input
-                    class="form-control mr-sm-2"
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
-                />
+
+            <!-- Conditional rendering based on user authentication -->
+            <div v-if="userIsAuthenticated" class="ml-2">
+                <span class="navbar-text" style="margin-right: 10px">{{ currentUser }}</span>
                 <button
-                    class="btn btn-outline-success my-2 my-sm-0"
-                    type="submit"
+                    @click="logout"
+                    class="btn btn-outline-danger my-2 my-sm-0"
                 >
-                    Search
+                    Logout
                 </button>
-            </form>
-            <!-- Add Login and Register links -->
-            <ul class="navbar-nav ml-2" v-if="this.user">
-                <li class="nav-item">
-                    <router-link to="/login" class="nav-link"
-                        >Login</router-link
-                    >
-                </li>
-                <li class="nav-item">
-                    <router-link to="/register" class="nav-link"
-                        >Register</router-link
-                    >
-                </li>
-            </ul>
+            </div>
+            <div v-else class="navbar-nav ml-2">
+                <router-link
+                    to="/login"
+                    class="nav-link"
+                    style="margin-right: 10px"
+                    >Login</router-link
+                >
+                <router-link to="/register" class="nav-link"
+                    >Register</router-link
+                >
+            </div>
         </div>
     </nav>
     <router-view></router-view>
 </template>
 
 <script>
-import { mapActions , mapState,mapGetters} from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
     computed: {
-        ...mapState(["user"]), // Use Vuex mapState to access the blogs state
+        ...mapState({
+            userIsAuthenticated: (state) => state.isAuthenticated,
+            currentUser: (state) => state.currentUser,
+        }),
     },
-
-    methods:{
-        ...mapGetters(["isAuthenticated"]),
-
-
+    methods: {
+        ...mapActions(["logout"]),
     },
-    mounted(){
-        console.log(this.user);
-
-        console.log(this.isAuthenticated());
-    }
-
-
-}
-
+};
 </script>
+
+<style></style>

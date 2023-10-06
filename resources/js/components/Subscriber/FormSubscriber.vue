@@ -95,7 +95,7 @@ export default {
                         this.$emit("create-subscriber", res.data);
                     });
             } catch (error) {
-                // Handle any errors that may occur during the request
+                alert(error.response.data.message)
                 console.error("Error creating subscriber:", error);
             }
             this.closeDialog();
