@@ -27,9 +27,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-success">Login</button>
-                    <a id="aa" href="{{ route('register') }}"
-                        >Don't have account ?</a
-                    >
+                    
                 </form>
             </div>
         </div>
