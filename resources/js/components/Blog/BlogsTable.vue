@@ -81,7 +81,7 @@ export default {
         },
     },
     computed: {
-        ...mapState(["blogs"]), // Use Vuex mapState to access the blogs state
+        ...mapState("blog",["blogs"]), // Use Vuex mapState to access the blogs state
     },
     components: {
         EditDialog, // Register the EditDialog component
@@ -97,7 +97,7 @@ export default {
         };
     },
     methods: {
-        ...mapActions(["fetchBlogs","deleteBlog"]),
+        ...mapActions("blog",["fetchBlogs","deleteBlog"]),
         handleBlogCreated(newBlog) {
             this.blogs.push(newBlog);
             this.isBlogUpdated = true;

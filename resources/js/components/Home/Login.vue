@@ -27,7 +27,7 @@
                     </div>
 
                     <button type="submit" class="btn btn-success">Login</button>
-                    
+
                 </form>
             </div>
         </div>
@@ -45,7 +45,7 @@ export default {
         };
     },
     methods: {
-        ...mapActions(["login"]),
+        ...mapActions('user', ["login"]),
         async handleSubmit() {
             try {
                 await this.login({

@@ -37,7 +37,9 @@
 
             <!-- Conditional rendering based on user authentication -->
             <div v-if="userIsAuthenticated" class="ml-2">
-                <span class="navbar-text" style="margin-right: 10px">{{ currentUser }}</span>
+                <span class="navbar-text" style="margin-right: 10px">{{
+                    currentUser
+                }}</span>
                 <button
                     @click="logout"
                     class="btn btn-outline-danger my-2 my-sm-0"
@@ -65,13 +67,13 @@
 import { mapState, mapActions } from "vuex";
 export default {
     computed: {
-        ...mapState({
+        ...mapState("user", {
             userIsAuthenticated: (state) => state.isAuthenticated,
             currentUser: (state) => state.currentUser,
         }),
     },
     methods: {
-        ...mapActions(["logout"]),
+        ...mapActions("user", ["logout"]),
     },
 };
 </script>

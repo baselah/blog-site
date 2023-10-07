@@ -80,7 +80,7 @@ export default {
         };
     },
     methods: {
-        ...mapActions(["createBlog", "updateBlog"]),
+        ...mapActions("blog",["createBlog", "updateBlog"]),
 
         handleImageUpload(event) {
             const file = event.target.files[0]; // Get the selected file

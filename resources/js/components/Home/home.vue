@@ -37,11 +37,11 @@
 import { mapState, mapActions } from "vuex";
 export default {
     computed: {
-        ...mapState(["blogs"]), // Use Vuex mapState to access the blogs state
+        ...mapState("blog",["blogs"]), // Use Vuex mapState to access the blogs state
     },
 
     methods: {
-        ...mapActions(["fetchBlogs"]),
+        ...mapActions("blog",["fetchBlogs"]),
     },
     mounted() {
         // Fetch blogs data when the component is mounted
